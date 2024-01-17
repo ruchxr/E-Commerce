@@ -1,0 +1,113 @@
+<div class="container">
+    <div class="text-center">
+        <h2>Create an account</h2>
+        <p style="color: gray;">One last step before shopping</p>
+    </div>
+
+    <form [formGroup]="userSignUpForm" (ngSubmit)="onSubmit()">
+        <div class="row form-group-margin m-3">
+            <div class="form-group col-md-12">
+                <label for="email">Email*</label>
+                <input 
+                type="email" 
+                class="form-control"
+                id="email"
+                formControlName="email"/>
+                <span class="text-danger" *ngIf='email?.touched && email?.errors?.["required"]'>
+                    Email is required
+                </span>
+                <span class="text-danger" *ngIf='email?.touched && email?.errors?.["email"]'>
+                    Please enter a valid email address
+                </span>
+            </div>
+            <div class="form-group col-md-6 mt-3">
+                <label for="firstName">First Name*</label>
+                <input 
+                type="text" 
+                class="form-control"
+                id="firstName"
+                formControlName="firstName"/>
+                <span class="text-danger" *ngIf='firstName?.touched && firstName?.errors?.["required"]'>
+                    First Name is required
+                </span>
+            </div>
+            <div class="form-group col-md-6 mt-3">
+                <label for="lastName">Last Name*</label>
+                <input
+                type="text"
+                class="form-control"
+                id="lastName"
+                formControlName="lastName">
+            </div>
+            <div class="form-group col-md-12 mt-3">
+                <label for="password">Password*</label>
+                <input
+                type="password"
+                class="form-control"
+                id="password"
+                formControlName="password">
+                <span class="text-danger" *ngIf='password?.touched && password?.errors?.["required"]'>
+                    Password is required
+                </span>
+            </div>
+            <div class="form-group col-md-12 mt-3">
+                <label for="confirmPassword">Confirm Password*</label>
+                <input 
+                type="password" 
+                class="form-control"
+                id="confirmPassword"
+                formControlName="confirmpassword"/>
+                <span class="text-danger" *ngIf='confirmPassword?.touched && confirmPassword?.errors?.["required"]'>
+                    Confirm Password field is required
+                </span>
+            </div>
+            <div class="form-group col-md-12 mt-3">
+                <label for="address">Address</label>
+                <input
+                type="text"
+                class="form-control"
+                id="address"
+                formControlName="address">
+            </div>
+            <div class="form-group col-md-6 mt-3">
+                <label for="City">City</label>
+                <input 
+                type="text" 
+                class="form-control"
+                id="City"
+                formControlName="city"/>
+            </div>
+            <div class="form-group col-md-6 mt-3">
+                <label for="State">State</label>
+                <input
+                type="text"
+                class="form-control"
+                id="state"
+                formControlName="state">
+            </div>
+            <div class="form-group col-md-12 mt-3">
+                <label for="pin">Pin / Zip code</label>
+                <input 
+                type="text" 
+                class="form-control"
+                id="pin"
+                formControlName="pin"/>
+            </div>
+        </div>
+        <div class="text-center form-group-margin">
+            <button type="submit" class="btn btn-warning" [disabled]="!userSignUpForm.valid">Join</button>
+            <br>
+            <span class="text-danger mt-2" *ngIf="!isPasswordCorrect">
+                The passwords do not match. Re-enter your password
+            </span>
+        </div>
+
+        <div class="alert" [ngClass]="
+        alertType === 0
+        ? 'alert-success' 
+        : alertType === 1 
+        ? 'alert-warning'
+        : 'alert-danger'"
+        *ngIf="alertMessage !== ''">{{ alertMessage }}</div>
+    </form>
+</div>

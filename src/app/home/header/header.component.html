@@ -1,0 +1,46 @@
+
+<div class="header">
+    <div class="row">
+        <div class="brand">
+            <h1 style="margin-bottom: 0px;">E-Store</h1>
+        </div>
+        <div class="p-0 my-4 w-50 h-25 bg-white">
+            <ng-container *ngIf="displayOptions">
+            <select #categoryOptions class="dropdown">
+                <option *ngFor="let category of categories"
+                value="{{category.id}}">{{ category.category }}</option>
+            </select>
+            <input #keyword class="form-control search-box" type="text" placeholder="Search...">
+            <button class="search-button" (click)="onSearchbtnClicked(categoryOptions.value, keyword.value)"><fa-icon [icon]="faSearch"></fa-icon></button>
+            </ng-container>
+        </div>
+        <div class="login-container p-0" *ngIf="!isUserAuthenticated">
+            <fa-icon class="user-icon" [icon]="userCircle"></fa-icon>
+            <h5><a routerLink="./login">Sign In / Join</a></h5>
+        </div>
+        <div class="user-container p-0" *ngIf="isUserAuthenticated">
+            <div class="dropdown user-dropdown">
+                <button class="btn btn-secondary dropdown-toggle user-dropdown-button" type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false">
+                    <fa-icon class="user-icon" [icon]="userCircle"></fa-icon>
+                    Hi {{ userName }}
+                </button>
+                <ul class="dropdown-menu" style="background-color: rgb(237, 237, 245);">
+                    <li><a class="dropdown-item" style="color: black;" (click)="logout()">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="cart-wishlist">
+            <button type="button" (click)="navigateToCart()">
+                <fa-icon [icon]="faShopping" style="color: white; font-size: 20px;"></fa-icon>
+                <ng-container *ngIf="cartStore.cart$ | async as cart">
+                   <span *ngIf="cart.totalProducts > 0"
+                    class="position-absolute top-10 start-20 translate-middle badge rounded-pill bg-warning text-dark ms-3">
+                    {{cart.totalProducts}}
+                    </span>
+                </ng-container>
+            </button>
+        </div>
+    </div>
+</div>

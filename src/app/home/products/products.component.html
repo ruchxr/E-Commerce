@@ -1,0 +1,19 @@
+<div *ngIf="!productsPresent" class="notFoundContainer">
+    <img src="../../../assets/images/browser.png">
+    <h3 style="margin-top: 50px;">Sorry the product is not available</h3>
+    <h4 style="margin-top: 10px;">But you can search for other more exciting options.......</h4>
+</div>
+<div class="main-product-container" *ngIf="productsPresent">
+    <div class="p-2 product-card" *ngFor="let product of products; let i=index">
+        <div class="product-image-container"><a routerLink="../product/{{product.id}}"><img [src]="product.product_img" alt=""></a></div>
+        <div class="product-info" style="padding-bottom: 0px;">
+            <h6><a routerLink="../product/{{product.id}}">{{product.product_name}}</a></h6>
+            <p class="product-price">₹{{product.price}}</p>
+            <app-ratings [score]="product.ratings"></app-ratings>
+            <div class="button-container">
+                <button (click)="addToCart(product)"><p style="width: 50%; display:inline-block; text-align: center; margin-bottom: 0px">Add to Cart</p>
+                    <fa-icon [icon]="faShoppingCart" style="display: inline-block; width: 50%; text-align:end; padding-right:10px"></fa-icon></button>
+            </div>
+        </div>
+    </div>
+</div>

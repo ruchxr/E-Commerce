@@ -1,0 +1,14 @@
+.header{
+    width: 100%;
+    background-color: rgb(44, 44, 84);
+    text-align: center;
+}
+
+.sad-icon{
+    color: white;
+}
+
+h1,h4{
+    margin-left: 50px;
+    margin-top: 30px;
+}

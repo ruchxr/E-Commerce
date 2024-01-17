@@ -1,0 +1,26 @@
+<div class="row my-5 product-details-container">
+    <div class="col-5 product-image-container">
+        <img src="{{singleProduct?.product_img}}">
+    </div>
+    <div class="col-7 product-information-container">
+        <span id="product-name">{{singleProduct?.product_name}}</span>
+        <app-ratings [score]="4"></app-ratings>
+        <hr/>
+        <div class="product-price">
+            Price: <span class="price">{{singleProduct?.price}}</span>
+            <div>
+                Inclusive of all taxes.
+            </div>
+            <div class="my-3 product-description" style="color: black">
+                {{singleProduct?.product_description}}
+            </div>
+            <div class="cart-wishlist">
+                <button type="button" (click)="addToCart(singleProduct)">
+                    <p>Add to Cart</p>
+                    <fa-icon [icon]="faShoppingCart"></fa-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+

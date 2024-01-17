@@ -1,0 +1,148 @@
+<ng-container *ngIf="!cartStore.cart.products.length">
+    <div class="p-4 ec-main-div">
+        <span class="my-5 ec-text">
+            <h1>The Cart is Empty.</h1><fa-icon [icon]="faShoppingCart"></fa-icon>
+            <br>
+            <h4>Click <span><a (click)="navigateToHome()" style="cursor: pointer; color: darkblue">here</a></span> to go continue shopping.</h4>
+        </span>
+        <span class="alert" [ngClass]="alertType === 0 ? 'alert-success' : 'alert-danger'" *ngIf="alertMessage !== ''">
+            {{alertMessage}}
+        </span>
+    </div>
+</ng-container>
+<ng-container *ngIf="cartStore.cart$ | async as cart">
+    <div class="row my-5 fc-main-div">
+        <div class="col-8 p-4">
+            <div class="row cart-item-card m-3" *ngFor="let item of cart.products">
+                <div class="col-4">
+                    <img [src]="item.product.product_img">
+                </div>
+                <div class="col-8">
+                    <div class="p-3 cart-item-details">
+                        <span class="cart-item-name">
+                            {{item.product.product_name}}
+                        </span>
+                        <div class="cart-item-price">
+                            <span>Rs.{{item.product.price}}</span>
+                        </div>
+                        <app-ratings [score]="item.product.ratings"></app-ratings>
+                        <hr/>
+                        <div class="cart-edit-container">
+                            <div class="btn-group mx-3" (click)="updateQuantity($event, item)">
+                                <div class="btn btn-outline-dark">
+                                    <span>-</span>
+                                </div>
+                                <div class="btn">{{item.quantity}}</div>
+                                <div class="btn btn-outline-dark">
+                                    <span>+</span>
+                                </div>
+                            </div>
+                            <div class="btn btn-outline-danger mx-4" (click)="removeItem(item)">
+                                <span><fa-icon [icon]="faTrash" style="margin-right: 10px;"></fa-icon>Remove item</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <ng-container *ngIf="cartStore.cart.products.length > 0">
+                <span class="alert" [ngClass]="alertType === 0 ? 'alert-success' : 'alert-danger'" *ngIf="alertMessage !== ''">
+                    {{alertMessage}}
+                </span>
+            <form [formGroup]="orderForm" (ngSubmit)="onSubmit()">
+                <div class="row">
+                    <div class="px-4 py-1 my-3 cart-summary">
+                        <h2 class="mb-5 mt-3">
+                            Delivery Address
+                        </h2>
+                        <div class="form-group row field-margin">
+                            <label for="name" class="col-sm-2 col-form-label">
+                                Name
+                            </label>
+                            <div class="col-sm-10">
+                                <input
+                                type="text"
+                                class="form-control"
+                                id="name"
+                                formControlName="name">
+                            </div>
+                        </div>
+                        <div class="form-group row field-margin">
+                            <label for="name" class="col-sm-2 col-form-label">
+                                Address
+                            </label>
+                            <div class="col-sm-10">
+                                <input
+                                type="text"
+                                class="form-control"
+                                id="address"
+                                formControlName="address">
+                            </div>
+                        </div>
+                        <div class="form-group row field-margin">
+                            <label for="name" class="col-sm-2 col-form-label">
+                                City
+                            </label>
+                            <div class="col-sm-10">
+                                <input
+                                type="text"
+                                class="form-control"
+                                id="city"
+                                formControlName="city">
+                            </div>
+                        </div>
+                        <div class="form-group row field-margin">
+                            <label for="name" class="col-sm-2 col-form-label">
+                                State
+                            </label>
+                            <div class="col-sm-10">
+                                <input
+                                type="text"
+                                class="form-control"
+                                id="state"
+                                formControlName="state">
+                            </div>
+                        </div>
+                        <div class="form-group row field-margin">
+                            <label for="name" class="col-sm-2 col-form-label">
+                                Pin
+                            </label>
+                            <div class="col-sm-10">
+                                <input
+                                type="text"
+                                class="form-control"
+                                id="pin"
+                                formControlName="pin">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="alert alert-danger mt-4"
+            *ngIf="!userAuthenticated">
+                Please log in to register your order.
+            </div>
+        <div class="px-4 py-3 my-4 cart-summary">
+            <h2 class="mb-5 mt-3">
+                Summary
+            </h2>
+            <div>
+                <span>Cart Total : Rs.{{ cart.totalAmount }}</span>
+                <span>Shipping Charges : Free</span>
+                <hr/>
+                <span class="summary-total">
+                    Total : Rs.{{cart.totalAmount}}
+                </span>
+                <hr/>
+            </div>
+            <button type="submit" class="btn submit-button" [disabled]="!orderForm.valid || disabledCheckout || !userAuthenticated">
+                Checkout
+            </button>
+        </div>
+        </div>
+        </form>
+    </ng-container>
+    </div>
+    </div>
+</ng-container>

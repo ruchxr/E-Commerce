@@ -1,0 +1,64 @@
+h3{
+    color: rgb(44, 44, 84);
+}
+    .side-navigation{
+        margin-top: 1em;
+        margin-left: 20px;
+        padding: 0.6em;
+        box-shadow: 1px 1px 8px 6px lightgray;
+        height: 97%;
+        border-radius: 1em;
+
+        .section-title{
+            padding: 1em;
+            h3{
+                text-align: center;
+            }
+        }
+
+        .individual-category{
+            .accordion-button{
+                background-color: rgb(201, 201, 240);
+            }
+
+            .main-category{
+                text-decoration: none;
+                color: rgb(44, 44, 84);
+                font-weight: bold;
+            }
+
+            ul{
+                padding: 0;
+            }
+
+            .sub-items{
+                text-align: center;
+                margin-bottom: 0.6em;
+                list-style-type: none;
+
+                a{
+                    text-decoration: none;
+                    color: black;
+
+                    &::after{
+                        content: '';
+                        display: block;
+                        bottom: 0;
+                        left: 0;
+                        height: 0.2em;
+                        background-color: rgb(44, 44, 84);
+                        transform: scaleX(0);
+                        transition-property: transform;
+                        transition-duration: 0.2s;
+                    }
+
+                    &:hover{
+                        &::after{
+                            transform: scaleX(70%);
+                        }
+                    }
+                }
+            }
+        }
+    }
+  
